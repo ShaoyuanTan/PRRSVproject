@@ -26,7 +26,6 @@ samtools index minimap_prrsv_sorted.bam
 qualimap_v2.2.1/qualimap bamqc -bam minimap_prrsv_sorted.bam -outdir qualimap_results
 
 alignqc analyze minimap_prrsv_sorted.bam -r reference.fasta --no_annotation -o prrsv_alignqc.xhtml
-
 ```
 
 ### Whole genome generation
@@ -40,7 +39,6 @@ seqtk-master/seqtk seq -a largest.fastq > largest.fasta
 minimap2 -ax map-ont largest.fasta prrsv.fastq > prrsv_mapped.sam  
 
 racon prrsv.fastq prrsv_mapped.sam largest.fasta > racon.fasta
-
 ```
 
 ### Coverage analysis
@@ -53,7 +51,6 @@ Alignment Search Tool (BLAST) with a significance filter of expect value (E) < 1
 ```
 makeblastdb -in downloaded_prrsv.fasta -title prrsvdatabase -dbtype nucl -out prrsvdatabase
 blastn -db prrsvdatabase -query prrsv.fastq -evalue 1e-50 -word_size 11 -outfmt 7 > prrsv_blast
-
 ```
 
 ## Differentiation of multiple viral strains
@@ -85,6 +82,5 @@ blastn -db prrsvdatabase -query prrsv1_unmapped.fastq -evalue 1e-50 -word_size 1
 
 minimap2 -ax map-ont reference2.fasta prrsv.fastq > prrsv2.sam
 ...
-
 ```
 This was repeated until no PRRSV strain was detected in the extracted unmapped reads. 
